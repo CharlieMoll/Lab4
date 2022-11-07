@@ -23,7 +23,7 @@ void loop() {
     driveMotor();
 }
 void driveMotor(){
-      if (dir)
+  if (dir)
   {
     digitalWrite(in1, HIGH);
     digitalWrite(in2, LOW);
@@ -34,4 +34,8 @@ void driveMotor(){
     digitalWrite(in2, HIGH);
   }
   analogWrite(en, spd);
+}
+
+void setDir(int in) {
+  dir = in;
 }

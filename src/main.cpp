@@ -6,6 +6,7 @@
 #include "pwm.h"
 #include "adc.h"
 #include "timer.h"
+#include "motor.hpp"
 
 // Implement state machine as an enum
 typedef enum stateType_enum {

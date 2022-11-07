@@ -3,6 +3,7 @@
 //----------------------------------------------------------------------//
 
 #include "pwm.h"
+#include "motor.hpp"
 
 
 // Function to initialized Timer 3 to use PWM
@@ -53,21 +54,25 @@ void changeDutyCycle(unsigned int result){
     }
     // if less than 2.5 volts, clockwise (Timer 3)    
     else if (result < (1023 * 0.5)) {
+        setDir(1);
         OCR3A = (1023* 0.5 - result) * 2;
         OCR4A = 0;
     }
     // if more than 2.5 volts, counterclockwise (Timer 4)
     else if (result > (1023 * 0.5)) {
+        setDir(0);
         OCR3A = 0;
         OCR4A = result;
     }
     // if 5 volts, max RPM counterclockwise
     else if (result == 1023) {
+        setDir(0);
         OCR3A = 0;
         OCR4A = 1023;
     }
     // if 0 volts, max RPM clockwise
     else if (result == 0) {
+        setDir(1);
         OCR3A = 1023;
         OCR4A = 0;
     }

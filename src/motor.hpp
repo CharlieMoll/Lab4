@@ -5,3 +5,4 @@
 void setup();
 void loop();
 void driveMotor();
+void setDir(int in);
