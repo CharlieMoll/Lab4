@@ -3,7 +3,8 @@
 #include <Arduino.h>
 #include "sevenSegment.h"
 #include "switch.h"
-#include "timer.h"
+#include "pwm.h"
+#include "adc.h"
 
 // Implement state machine as an enum
 typedef enum stateType_enum {
@@ -21,8 +22,11 @@ int main() {
   // Initialize components
   initSwitchPD0();
   initSevenSegment();
-  initTimer0();
-  initTimer1();
+  initPWMTimer3();
+  initPWMTimer4();
+  initADC0();
+  unsigned int result;
+  
 
   // Loop
   while(1) {
@@ -33,12 +37,15 @@ int main() {
       // If waiting for press, do nothing
       case wait_press:
         // TODO: Handle ADC conversion to control motor via PWM duty cycle
+        result = ADCL;
+        result += ((unsigned int) ADCH) << 8;
+        changeDutyCycle(result);
         clearDisplay();
         break;
 
       // If in debounce state, delay for 1 ms to avoid issues, then progress to waiting for release
       case debounce_press:
-        delayMs(1);
+        _delay_ms(1);
         state = wait_release;
         break;
 
@@ -48,7 +55,7 @@ int main() {
       
       // If in release debounce state, delay for 1 ms to avoid issues, then progress to waiting for press
       case debounce_release:
-        delayMs(1);
+        _delay_ms(1);
         state = nine;
         break;
 
@@ -56,62 +63,62 @@ int main() {
       case nine: 
         // TODO: Turn motor off here
         toggleDisplay(9);
-        delayS(1);
+        _delay_ms(1000);
         state = eight;
         break;
 
       case eight: 
         toggleDisplay(8);
-        delayS(1);
+        _delay_ms(1000);
         state = seven;
         break;
 
       case seven: 
         toggleDisplay(7);
-        delayS(1);
+        _delay_ms(1000);
         state = six;
         break;
 
       case six: 
         toggleDisplay(6);
-        delayS(1);
+        _delay_ms(1000);
         state = five;
         break;
 
       case five: 
         toggleDisplay(5);
-        delayS(1);
+        _delay_ms(1000);
         state = four;
         break;
 
       case four: 
         toggleDisplay(4);
-        delayS(1);
+        _delay_ms(1000);
         state = three;
         break;
 
       case three: 
         toggleDisplay(3);
-        delayS(1);
+        _delay_ms(1000);
         state = two;
         break;
 
       case two: 
         toggleDisplay(2);
-        delayS(1);
+        _delay_ms(1000);
         state = one;
         break;
 
       case one: 
         toggleDisplay(1);
-        delayS(1);
+        _delay_ms(1000);
         state = zero;
         break;
 
       // Once zero is displayed, make the active flag true again to allow the button to be pressed, and the continue back to the original state
       case zero: 
         toggleDisplay(0);
-        delayS(1);
+        _delay_ms(1000);
         state = wait_press;
         active = true;
         break;
