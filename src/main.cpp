@@ -63,6 +63,7 @@ int main() {
       // For each state 9 through 0, desplay the correct number and then wait a second before transitioning to the next state
       case nine: 
         // TODO: Turn motor off here
+        changeDutyCycle(1023*0.5);
         toggleDisplay(9);
         delayS(1);
         state = eight;
