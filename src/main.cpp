@@ -3,6 +3,7 @@
 #include <Arduino.h>
 #include "sevenSegment.h"
 #include "switch.h"
+#include "timer.h"
 
 // Implement state machine as an enum
 typedef enum stateType_enum {
@@ -35,7 +36,7 @@ int main() {
 
       // If in debounce state, delay for 1 ms to avoid issues, then progress to waiting for release
       case debounce_press:
-        _delay_ms(1);
+        delayMs(1);
         state = wait_release;
         break;
 
@@ -45,7 +46,7 @@ int main() {
       
       // If in release debounce state, delay for 1 ms to avoid issues, then progress to waiting for press
       case debounce_release:
-        _delay_ms(1);
+        delayMs(1);
         state = nine;
         break;
 
@@ -53,62 +54,62 @@ int main() {
       case nine: 
         // TODO: Turn motor off here
         toggleDisplay(9);
-        _delay_ms(1000);
+        delayS(1);
         state = eight;
         break;
 
       case eight: 
         toggleDisplay(8);
-        _delay_ms(1000);
+        delayS(1);
         state = seven;
         break;
 
       case seven: 
         toggleDisplay(7);
-        _delay_ms(1000);
+        delayS(1);
         state = six;
         break;
 
       case six: 
         toggleDisplay(6);
-        _delay_ms(1000);
+        delayS(1);
         state = five;
         break;
 
       case five: 
         toggleDisplay(5);
-        _delay_ms(1000);
+        delayS(1);
         state = four;
         break;
 
       case four: 
         toggleDisplay(4);
-        _delay_ms(1000);
+        delayS(1);
         state = three;
         break;
 
       case three: 
         toggleDisplay(3);
-        _delay_ms(1000);
+        delayS(1);
         state = two;
         break;
 
       case two: 
         toggleDisplay(2);
-        _delay_ms(1000);
+        delayS(1);
         state = one;
         break;
 
       case one: 
         toggleDisplay(1);
-        _delay_ms(1000);
+        delayS(1);
         state = zero;
         break;
 
       // Once zero is displayed, make the active flag true again to allow the button to be pressed, and the continue back to the original state
       case zero: 
         toggleDisplay(0);
-        _delay_ms(1000);
+        delayS(1);
         state = wait_press;
         active = true;
         break;
