@@ -26,6 +26,8 @@ int main() {
   initPWMTimer3();
   initPWMTimer4();
   initADC0();
+  initTimer0();
+  initTimer1();
   unsigned int result;
   
 
