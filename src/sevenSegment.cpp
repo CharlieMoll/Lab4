@@ -1,5 +1,5 @@
 // Description: This file implements the initialization of a seven segment display that uses
-// PA0-7 (Pins 22-29), and also provides functionality to display all digits 0-9
+// PC0-7 (Pins 22-29), and also provides functionality to display all digits 0-9
 //----------------------------------------------------------------------//
 #include <avr/io.h>
 #include "sevenSegment.h"
@@ -7,13 +7,13 @@
 void initSevenSegment() {
 
     // Set all pins as outputs
-    DDRA |= (1 << DDA0) | (1 << DDA1) | (1 << DDA2) | (1 << DDA3) | (1 << DDA4) | (1 << DDA5) | (1 << DDA6) | (1 << DDA7);
+    DDRC |= (1 << DDC0) | (1 << DDC1) | (1 << DDC2) | (1 << DDC3) | (1 << DDC4) | (1 << DDC5) | (1 << DDC6) | (1 << DDC7);
 
 }
 
 void clearDisplay() {
     // Set all pins to 0 to turn off all LEDs
-    PORTA &= ~((1 << PORTA0) | (1 << PORTA1) | (1 << PORTA2) | (1 << PORTA3) | (1 << PORTA4) | (1 << PORTA5) | (1 << PORTA6) | (1 << PORTA7));
+    PORTC &= ~((1 << PORTC0) | (1 << PORTC1) | (1 << PORTC2) | (1 << PORTC3) | (1 << PORTC4) | (1 << PORTC5) | (1 << PORTC6) | (1 << PORTC7));
 }
 
 void toggleDisplay(int num) {
@@ -60,52 +60,52 @@ Seven segment configurations for LEDs A-H are as follows (LED H is the decimal p
 */
 
 void setZero() {
-    PORTA |= (1 << PORTA0) | (1 << PORTA1) | (1 << PORTA2) | (1 << PORTA3) | (1 << PORTA4) | (1 << PORTA5);
-    PORTA &= ~((1 << PORTA6) | (1 << PORTA7));
+    PORTC |= (1 << PORTC0) | (1 << PORTC1) | (1 << PORTC2) | (1 << PORTC3) | (1 << PORTC4) | (1 << PORTC5);
+    PORTC &= ~((1 << PORTC6) | (1 << PORTC7));
 }
 
 void setOne() {
-    PORTA |= (1 << PORTA1) | (1 << PORTA2);
-    PORTA &= ~((1 << PORTA0) | (1 << PORTA3) | (1 << PORTA4) | (1 << PORTA5) | (1 << PORTA6) | (1 << PORTA7));    
+    PORTC |= (1 << PORTC1) | (1 << PORTC2);
+    PORTC &= ~((1 << PORTC0) | (1 << PORTC3) | (1 << PORTC4) | (1 << PORTC5) | (1 << PORTC6) | (1 << PORTC7));    
 }
 
 void setTwo() {
-    PORTA |= (1 << PORTA0) | (1 << PORTA1) | (1 << PORTA3) | (1 << PORTA4) | (1 << PORTA6);
-    PORTA &= ~((1 << PORTA2) | (1 << PORTA5) | (1 << PORTA7)); 
+    PORTC |= (1 << PORTC0) | (1 << PORTC1) | (1 << PORTC3) | (1 << PORTC4) | (1 << PORTC6);
+    PORTC &= ~((1 << PORTC2) | (1 << PORTC5) | (1 << PORTC7)); 
 }
 
 void setThree() {
-    PORTA |= (1 << PORTA0) | (1 << PORTA1) | (1 << PORTA2) | (1 << PORTA3) | (1 << PORTA6);
-    PORTA &= ~((1 << PORTA4) | (1 << PORTA5) | (1 << PORTA7));
+    PORTC |= (1 << PORTC0) | (1 << PORTC1) | (1 << PORTC2) | (1 << PORTC3) | (1 << PORTC6);
+    PORTC &= ~((1 << PORTC4) | (1 << PORTC5) | (1 << PORTC7));
 }
 
 void setFour() {
-    PORTA |= (1 << PORTA1) | (1 << PORTA2) | (1 << PORTA5) | (1 << PORTA6);
-    PORTA &= ~((1 << PORTA0) | (1 << PORTA3) | (1 << PORTA4) | (1 << PORTA7));
+    PORTC |= (1 << PORTC1) | (1 << PORTC2) | (1 << PORTC5) | (1 << PORTC6);
+    PORTC &= ~((1 << PORTC0) | (1 << PORTC3) | (1 << PORTC4) | (1 << PORTC7));
 }
 
 void setFive() {
-    PORTA |= (1 << PORTA0) | (1 << PORTA2) | (1 << PORTA3) | (1 << PORTA5) | (1 << PORTA6);
-    PORTA &= ~((1 << PORTA1) | (1 << PORTA4) | (1 << PORTA7));
+    PORTC |= (1 << PORTC0) | (1 << PORTC2) | (1 << PORTC3) | (1 << PORTC5) | (1 << PORTC6);
+    PORTC &= ~((1 << PORTC1) | (1 << PORTC4) | (1 << PORTC7));
 }
 
 void setSix() {
-    PORTA |= (1 << PORTA0) | (1 << PORTA2) | (1 << PORTA3) | (1 << PORTA4) | (1 << PORTA5) | (1 << PORTA6);
-    PORTA &= ~((1 << PORTA1) | (1 << PORTA7));
+    PORTC |= (1 << PORTC0) | (1 << PORTC2) | (1 << PORTC3) | (1 << PORTC4) | (1 << PORTC5) | (1 << PORTC6);
+    PORTC &= ~((1 << PORTC1) | (1 << PORTC7));
 }
 
 void setSeven() {
-    PORTA |= (1 << PORTA0) | (1 << PORTA1) | (1 << PORTA2);
-    PORTA &= ~((1 << PORTA3) | (1 << PORTA4) | (1 << PORTA5) | (1 << PORTA6) | (1 << PORTA7));
+    PORTC |= (1 << PORTC0) | (1 << PORTC1) | (1 << PORTC2);
+    PORTC &= ~((1 << PORTC3) | (1 << PORTC4) | (1 << PORTC5) | (1 << PORTC6) | (1 << PORTC7));
 }
 
 void setEight() {
-    PORTA |= (1 << PORTA0) | (1 << PORTA1) | (1 << PORTA2) | (1 << PORTA3) | (1 << PORTA4) | (1 << PORTA5) | (1 << PORTA6);
-    PORTA &= ~((1 << PORTA7));
+    PORTC |= (1 << PORTC0) | (1 << PORTC1) | (1 << PORTC2) | (1 << PORTC3) | (1 << PORTC4) | (1 << PORTC5) | (1 << PORTC6);
+    PORTC &= ~((1 << PORTC7));
 }
 
 void setNine() { 
-    PORTA |= (1 << PORTA0) | (1 << PORTA1) | (1 << PORTA2) | (1 << PORTA3) | (1 << PORTA5) | (1 << PORTA6);
-    PORTA &= ~((1 << PORTA4) | (1 << PORTA7));
+    PORTC |= (1 << PORTC0) | (1 << PORTC1) | (1 << PORTC2) | (1 << PORTC3) | (1 << PORTC5) | (1 << PORTC6);
+    PORTC &= ~((1 << PORTC4) | (1 << PORTC7));
 }
 
