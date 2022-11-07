@@ -21,6 +21,8 @@ int main() {
   // Initialize components
   initSwitchPD0();
   initSevenSegment();
+  initTimer0();
+  initTimer1();
 
   // Loop
   while(1) {
