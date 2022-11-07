@@ -53,7 +53,7 @@ void changeDutyCycle(unsigned int result){
     }
     // if less than 2.5 volts, clockwise (Timer 3)    
     else if (result < (1023 * 0.5)) {
-        OCR3A = result;
+        OCR3A = (1023* 0.5 - result) * 2;
         OCR4A = 0;
     }
     // if more than 2.5 volts, counterclockwise (Timer 4)
