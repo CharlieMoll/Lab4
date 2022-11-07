@@ -23,7 +23,6 @@ int main() {
   // Initialize components
   initSwitchPD0();
   initSevenSegment();
-  clearDisplay();
   initPWMTimer3();
   initPWMTimer4();
   initADC0();
@@ -41,7 +40,7 @@ int main() {
         // TODO: Handle ADC conversion to control motor via PWM duty cycle
         result = ADCL;
         result += ((unsigned int) ADCH) << 8;
-        //changeDutyCycle(result);
+        changeDutyCycle(result);
         clearDisplay();
         break;
 

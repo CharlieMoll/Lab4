@@ -45,9 +45,30 @@ void initPWMTimer4(){
 }
 
 void changeDutyCycle(unsigned int result){
-    //read in ADCL first then append ADCH
-    result = ADCL;
-    result += ((unsigned int) ADCH) << 8;
-    OCR3A = result;
-    OCR4A = result;
+    // read in ADCL and ADCH as 10bit result
+    // if 2.5 volts, then no PWM to motor
+    if (result == (1023 * 0.5)) {
+        OCR3A = 0;
+        OCR4A = 0;
+    }
+    // if less than 2.5 volts, clockwise (Timer 3)    
+    else if (result < (1023 * 0.5)) {
+        OCR3A = result;
+        OCR4A = 0;
+    }
+    // if more than 2.5 volts, counterclockwise (Timer 4)
+    else if (result > (1023 * 0.5)) {
+        OCR3A = 0;
+        OCR4A = result;
+    }
+    // if 5 volts, max RPM counterclockwise
+    else if (result == 1023) {
+        OCR3A = 0;
+        OCR4A = 1023;
+    }
+    // if 0 volts, max RPM clockwise
+    else if (result == 0) {
+        OCR3A = 1023;
+        OCR4A = 0;
+    }
 }
