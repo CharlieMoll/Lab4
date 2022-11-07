@@ -46,8 +46,6 @@ void initPWMTimer4(){
 
 void changeDutyCycle(unsigned int result){
     //read in ADCL first then append ADCH
-    result = ADCL;
-    result += ((unsigned int) ADCH) << 8;
     OCR3A = result;
     OCR4A = result;
 }
