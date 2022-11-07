@@ -20,6 +20,11 @@ int main() {
   // Initialize components
   initSwitchPD0();
   initSevenSegment();
+  initPWMTimer3();
+  initPWMTimer4();
+  initADC0();
+  unsigned int result;
+  
 
   // Loop
   while(1) {
@@ -30,6 +35,9 @@ int main() {
       // If waiting for press, do nothing
       case wait_press:
         // TODO: Handle ADC conversion to control motor via PWM duty cycle
+        result = ADCL;
+        result += ((unsigned int) ADCH) << 8;
+        changeDutyCycle(result);
         clearDisplay();
         break;
 
