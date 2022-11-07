@@ -9,7 +9,7 @@
 
 void initPWMTimer3();
 void initPWMTimer4();
-void changeDutyCycle(unsigned char result);
+void changeDutyCycle(unsigned int result);
 
 
 #endif
